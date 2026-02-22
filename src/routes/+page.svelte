@@ -212,7 +212,7 @@
 
 <div class="container mx-auto max-w-3xl py-4 sm:px-4">
 	<!-- Header -->
-	<div class="space-y-1 text-center">
+	<div class="space-y-1 px-4 text-center">
 		<h1 class="text-3xl font-bold">Semafor časovnih blokov omrežnine</h1>
 		<p class="text-lg text-muted-foreground">
 			Preprosta vizualizacija časovnih blokov glede na dan in uro.
