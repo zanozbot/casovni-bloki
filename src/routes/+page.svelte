@@ -299,14 +299,14 @@
 				<Popover.Root bind:open={popoverOpen}>
 					<Popover.Trigger>
 						{#snippet child({ props }: { props: Record<string, any> })}
-							<Button {...props} variant="outline" class="w-48 justify-between font-normal">
+							<Button {...props} variant="outline" class="justify-between font-normal">
 								{selectedDate.toLocaleDateString('sl-SI', {
 									weekday: 'long',
 									year: 'numeric',
 									month: 'short',
 									day: 'numeric'
 								})}
-								<ChevronDownIcon class="size-4" />
+								<ChevronDownIcon />
 							</Button>
 						{/snippet}
 					</Popover.Trigger>
