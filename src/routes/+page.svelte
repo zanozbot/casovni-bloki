@@ -16,8 +16,6 @@
 	import { Github, RotateCcw } from '@lucide/svelte';
 	import ThemeToggle from '$lib/components/theme-toggle.svelte';
 
-	let { data } = $props();
-
 	// Reactive state for selected date and time
 	let selectedDate = $state(new Date());
 	let popoverOpen = $state(false);
@@ -183,39 +181,12 @@
 	};
 </script>
 
-<svelte:head>
-	<title>{data.meta.title}</title>
-	<meta name="description" content={data.meta.description} />
-	<meta name="keywords" content={data.meta.keywords} />
-	{@html `<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "WebApplication",
-			"name": "Semafor časovnih blokov",
-			"applicationCategory": "UtilitiesApplication",
-			"operatingSystem": "Web",
-			"description": "Semafor časovnih blokov omrežnine za Slovenijo. Vizualizacija trenutnega bloka porabe elektrike in pregled blokov za izbran dan in uro.",
-			"url": "https://casovni-bloki.ozbot.si",
-			"author": {
-				"@type": "Organization",
-				"name": "ozbot.si",
-				"url": "https://ozbot.si"
-			},
-			"offers": {
-				"@type": "Offer",
-				"price": "0",
-				"priceCurrency": "EUR"
-			}
-		}
-	<\/script>`}
-</svelte:head>
-
 <div class="container mx-auto max-w-3xl py-4 sm:px-4">
 	<!-- Header -->
 	<div class="space-y-1 px-4 text-center">
 		<h1 class="text-3xl font-bold">Semafor časovnih blokov omrežnine</h1>
 		<p class="text-lg text-muted-foreground">
-			Preprosta vizualizacija časovnih blokov glede na dan in uro.
+			Preprosta vizualizacija časovnih blokov omrežnine glede na dan in uro.
 		</p>
 		<div>
 			<ThemeToggle />
