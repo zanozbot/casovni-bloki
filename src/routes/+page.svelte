@@ -112,16 +112,21 @@
 		if (!block) return null;
 
 		// Format end time
-		let endTime = '';
+		const endTime = `${String(block.end).padStart(2, '0')}:00`;
+		let showNextDay = false;
+
 		if (block.isOvernight) {
-			endTime = `${String(block.end).padStart(2, '0')}:00 (naslednji dan)`;
-		} else {
-			endTime = `${String(block.end).padStart(2, '0')}:00`;
+			const currentHour = selectedDate.getHours();
+			// If we're in the evening part of the overnight block (>= start hour),
+			// the end time is next day. If we're in the morning part (< end hour),
+			// the end time is same day.
+			showNextDay = currentHour >= block.start;
 		}
 
 		return {
 			blockId: block.id,
-			endTime
+			endTime,
+			showNextDay
 		};
 	});
 
@@ -236,6 +241,16 @@
 								class="fill-muted-foreground! text-base!"
 								dy={15}
 							/>
+							<!-- Next day indicator -->
+							{#if currentBlockInfo.showNextDay}
+								<Text
+									value="(naslednji dan)"
+									textAnchor="middle"
+									verticalAnchor="middle"
+									class="fill-muted-foreground! text-sm!"
+									dy={35}
+								/>
+							{/if}
 						{/if}
 
 						<!-- Hour labels around the circle -->
