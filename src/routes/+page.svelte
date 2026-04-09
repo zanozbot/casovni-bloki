@@ -13,7 +13,7 @@
 	import { HOLYDAYS } from '$lib/holydays';
 	import { isEasterMonday } from '$lib/easter';
 	import { Label } from '$lib/components/ui/label';
-	import { Github, RotateCcw } from '@lucide/svelte';
+	import { CoffeeIcon, Github, RotateCcw } from '@lucide/svelte';
 	import ThemeToggle from '$lib/components/theme-toggle.svelte';
 
 	// Reactive state for selected date and time
@@ -198,6 +198,11 @@
 			<a href="https://github.com/zanozbot/casovni-bloki" target="_blank" rel="noopener noreferrer">
 				<Button variant="outline" size="icon">
 					<Github />
+				</Button>
+			</a>
+			<a href="https://buymeacoffee.com/zanozbot" target="_blank" rel="noopener noreferrer">
+				<Button variant="outline" size="icon" title="Buy me a coffee">
+					<CoffeeIcon className="h-4 w-4" />
 				</Button>
 			</a>
 		</div>
