@@ -112,6 +112,76 @@ const TIME_BLOCKS_LOW_SEASON_WEEKENDS_AND_HOLYDAYS: TimeBlock[] = [
 ];
 
 /**
+ * Time blocks valid from 1 January 2027 (Uradni list RS 76/2025).
+ * Block 2 no longer appears in low season; weekends/holidays have only two blocks per day.
+ */
+const NEW_BLOCKS_FROM = new Date(2027, 0, 1);
+
+const TIME_BLOCKS_2027_HIGH_SEASON_WORKDAYS: TimeBlock[] = [
+	{
+		id: 1,
+		periods: [
+			{ start: 6, end: 12 },
+			{ start: 17, end: 20 }
+		]
+	},
+	{
+		id: 2,
+		periods: [
+			{ start: 12, end: 17 },
+			{ start: 20, end: 22 }
+		]
+	},
+	{ id: 3, periods: [{ start: 22, end: 30 }] }
+];
+
+const TIME_BLOCKS_2027_HIGH_SEASON_WEEKENDS_AND_HOLYDAYS: TimeBlock[] = [
+	{
+		id: 3,
+		periods: [
+			{ start: 6, end: 12 },
+			{ start: 17, end: 22 }
+		]
+	},
+	{
+		id: 4,
+		periods: [
+			{ start: 12, end: 17 },
+			{ start: 22, end: 30 }
+		]
+	}
+];
+
+const TIME_BLOCKS_2027_LOW_SEASON_WORKDAYS: TimeBlock[] = [
+	{
+		id: 3,
+		periods: [
+			{ start: 6, end: 12 },
+			{ start: 17, end: 22 }
+		]
+	},
+	{ id: 4, periods: [{ start: 12, end: 17 }] },
+	{ id: 5, periods: [{ start: 22, end: 30 }] }
+];
+
+const TIME_BLOCKS_2027_LOW_SEASON_WEEKENDS_AND_HOLYDAYS: TimeBlock[] = [
+	{
+		id: 4,
+		periods: [
+			{ start: 6, end: 12 },
+			{ start: 17, end: 22 }
+		]
+	},
+	{
+		id: 5,
+		periods: [
+			{ start: 12, end: 17 },
+			{ start: 22, end: 30 }
+		]
+	}
+];
+
+/**
  * Get time blocks configuration for a given date.
  */
 const getTimeBlocksConfig = (date: Date): TimeBlock[] => {
@@ -122,11 +192,23 @@ const getTimeBlocksConfig = (date: Date): TimeBlock[] => {
 	const _isEasterMonday = date.getMonth() === 2 && isEasterMonday(date);
 	const isWeekendOrHolyday = isWeekend || isHolyday || _isEasterMonday;
 
+	const isNew = date >= NEW_BLOCKS_FROM;
+
 	if (isHighSeason(date)) {
+		if (isNew) {
+			return isWeekendOrHolyday
+				? TIME_BLOCKS_2027_HIGH_SEASON_WEEKENDS_AND_HOLYDAYS
+				: TIME_BLOCKS_2027_HIGH_SEASON_WORKDAYS;
+		}
 		return isWeekendOrHolyday
 			? TIME_BLOCKS_HIGH_SEASON_WEEKENDS_AND_HOLYDAYS
 			: TIME_BLOCKS_HIGH_SEASON_WORKDAYS;
 	} else if (isLowSeason(date)) {
+		if (isNew) {
+			return isWeekendOrHolyday
+				? TIME_BLOCKS_2027_LOW_SEASON_WEEKENDS_AND_HOLYDAYS
+				: TIME_BLOCKS_2027_LOW_SEASON_WORKDAYS;
+		}
 		return isWeekendOrHolyday
 			? TIME_BLOCKS_LOW_SEASON_WEEKENDS_AND_HOLYDAYS
 			: TIME_BLOCKS_LOW_SEASON_WORKDAYS;
